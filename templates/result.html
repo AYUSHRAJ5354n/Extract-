@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extraction Result - Dailymotion Link Extractor</title>
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+</head>
+<body>
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card border-secondary mb-4">
+                    <div class="card-header bg-success bg-opacity-25">
+                        <h1 class="h3 mb-0">Extraction Result</h1>
+                    </div>
+                    <div class="card-body">
+                        {% if success %}
+                            <div class="alert alert-success">
+                                <h4 class="alert-heading">Success!</h4>
+                                <p>Dailymotion link successfully extracted.</p>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Original URL:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" value="{{ original_url }}" readonly>
+                                    <button class="btn btn-outline-secondary copy-btn" data-clipboard-text="{{ original_url }}">
+                                        Copy
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Dailymotion Link:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" value="{{ dailymotion_link }}" readonly>
+                                    <button class="btn btn-outline-secondary copy-btn" data-clipboard-text="{{ dailymotion_link }}">
+                                        Copy
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+                                <a href="{{ url_for('index') }}" class="btn btn-secondary">Extract Another Link</a>
+                                <a href="{{ dailymotion_link }}" target="_blank" class="btn btn-primary">Open Video</a>
+                            </div>
+                        {% else %}
+                            <div class="alert alert-danger">
+                                <h4 class="alert-heading">Error!</h4>
+                                <p>{{ error }}</p>
+                            </div>
+                            <div class="d-grid">
+                                <a href="{{ url_for('index') }}" class="btn btn-secondary">Try Again</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
